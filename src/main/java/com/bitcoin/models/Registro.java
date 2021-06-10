@@ -21,7 +21,7 @@ public class Registro {
     private String docUser;
     private String phoneUser;
     private String password;
-    private int cardNumber;
+    private long cardNumber;
     private int securityCode;
 
 }
