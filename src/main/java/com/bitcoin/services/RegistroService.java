@@ -2,6 +2,7 @@ package com.bitcoin.services;
 
 import com.bitcoin.repositories.RegistroRepository;
 import com.bitcoin.models.Registro;
+import com.mongodb.lang.NonNull;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,8 +31,8 @@ public class RegistroService {
         return registro;
     }
 
-    @Transactional
-    public Registro updateRegistro(String registroId, Registro registro){
+
+    public Registro updateRegistro(String registroId,@NonNull Registro registro){
         var registroAux = getRegistroById(registroId);
         if(registro.getPassword() != null) { registroAux.setPassword(registro.getPassword()); }
         if(registro.getEmailUser() != null ) { registroAux.setEmailUser(registro.getEmailUser()); }
@@ -40,7 +41,7 @@ public class RegistroService {
         if(registro.getDocUser() != null ) { registroAux.setDocUser(registro.getDocUser());}
         if(registro.getCardNumber() != 0) {registroAux.setCardNumber(registro.getCardNumber());}
         if(registro.getSecurityCode() != 0) { registroAux.setSecurityCode(registro.getSecurityCode()); }
-        return registroAux;
+        return registroRepository.save(registroAux);
     }
 
     public Boolean deleteRegistro(String idRegistro){
