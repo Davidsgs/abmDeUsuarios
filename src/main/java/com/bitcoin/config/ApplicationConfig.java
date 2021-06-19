@@ -41,5 +41,16 @@ public class ApplicationConfig extends AbstractMongoClientConfiguration{
     protected Collection<String> getMappingBasePackages() {
         return Collections.singleton("com.bitcoin");
     }
+    
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurerAdapter() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH");
+            }
+        };
+    }
 
 }
