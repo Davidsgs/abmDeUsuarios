@@ -30,6 +30,7 @@ public class RegistroService {
         return registro;
     }
 
+    @Transactional
     public Registro updateRegistro(String registroId, Registro registro){
         var registroAux = getRegistroById(registroId);
         if(registro.getPassword() != null) { registroAux.setPassword(registro.getPassword()); }
